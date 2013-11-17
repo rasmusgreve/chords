@@ -2,9 +2,11 @@
 $show = (isset($_GET['show']) && preg_match("/[a-z]+/",$_GET['show'])) ? $_GET['show'] : 'search';
 $action = (isset($_GET['action']) && preg_match("/[a-z]+/",$_GET['action'])) ? $_GET['action'] : '';
 include("php/util.php");
-include("php/$show.php");
 
-
+if (file_exists("php/$show.php"))
+	include("php/$show.php");
+else
+	include("php/error.php");
 
 ?>
 
@@ -34,7 +36,7 @@ include("php/$show.php");
 	  <ul class="nav navbar-nav">
 		<li class="<?=($show == 'search')?'active':''?>"><a href="./?show=search">Search</a></li>
 		<li class="<?=($show == 'browse')?'active':''?>"><a href="./?show=browse">Browse</a></li>
-		<li class="<?=($show == 'create')?'active':''?>"><a href="./?show=create">New</a></li>
+		<li class="<?=($show == 'edit')?'active':''?>"><a href="./?show=edit">New</a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 		<li><a href="./?action=logout">Log out</a></li>
