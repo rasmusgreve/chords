@@ -18,3 +18,16 @@
 {
 	content:'-';
 }
+
+
+.song-table tbody tr td:first-child
+{
+	font-weight:bold;
+}
+
+.linkrow{
+	cursor:pointer;
+}
+.linkrow:hover td{
+	background-color:#FFE !important;
+}

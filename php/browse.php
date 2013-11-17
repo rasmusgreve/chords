@@ -19,19 +19,39 @@ function getContent()
 			}
 			?>
 		</ul>
-</div>
+	</div>
 </div>
 <div class="col-md-11">
-<div class="well">
-</div>
+	<h1><?=$letter?></h1>
+	<table class="table table-striped song-table">
+		<thead>
+			<tr>
+				<th>Song title</th><th>Artist</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="linkrow" href="./?show=song&id=1">
+				<td>Fix you</td><td>Coldplay</td>
+			</tr>
+			<tr class="linkrow" href="./?show=song&id=2">
+				<td>Samuel and Rosella</td><td>Lemon Demon</td>
+			</tr>
+			<tr class="linkrow" href="./?show=song&id=3">
+				<td>Circle of Life</td><td>Elton John</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 
 <?php
 }
 function getJavascript(){
 ?>
-
-
+	jQuery(document).ready(function($) {
+		  $(".linkrow").click(function() {
+				window.document.location = $(this).attr("href");
+		  });
+	});
 <?php
 }
 ?>
