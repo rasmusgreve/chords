@@ -42,7 +42,7 @@ function value_lyrics($action, $data)
 	{
 		case 'get':
 			$q = mysql_query("SELECT `text` FROM `lyrics` WHERE `song` = '$song' AND `id` = '$id' LIMIT 1;");
-			if (mysql_num_rows($q) == 0) die("No data");
+			if (mysql_num_rows($q) == 0) die("");
 			echo mysql_result($q,0,0);
 			break;
 		case 'put':
