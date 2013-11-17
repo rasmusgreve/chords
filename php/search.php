@@ -98,7 +98,11 @@ $('#query_type_menu li a').click(function() {
 }
 function getJavascriptQuery(){
 ?>
-
+	jQuery(document).ready(function($) {
+		  $(".linkrow").click(function() {
+				window.document.location = $(this).attr("href");
+		  });
+	});
 
 <?php
 }
