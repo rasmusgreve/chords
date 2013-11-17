@@ -19,6 +19,10 @@
 	content:'-';
 }
 
+.pre-search-container
+{
+	margin-top:80px;
+}
 
 .linkrow{
 	cursor:pointer;
