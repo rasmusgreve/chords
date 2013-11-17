@@ -33,11 +33,7 @@ function getContent()
 }
 function getJavascript(){
 ?>
-	jQuery(document).ready(function($) {
-		  $(".linkrow").click(function() {
-				window.document.location = $(this).attr("href");
-		  });
-	});
+
 <?php
 }
 ?>

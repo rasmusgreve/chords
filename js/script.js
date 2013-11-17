@@ -1,3 +1,9 @@
+jQuery(document).ready(function($) {
+	  $(".linkrow").click(function() {
+			window.document.location = $(this).attr("href");
+	  });
+});
+
 /*
 var watchedfun;
 var unwatchedfun;
