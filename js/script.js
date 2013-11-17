@@ -1,3 +1,4 @@
+/*
 var watchedfun;
 var unwatchedfun;
 watchedfun = function(eo){
@@ -41,3 +42,4 @@ setInterval(function(){
 		$("#add_link_form").submit();
     }
 }, 100);
+*/
