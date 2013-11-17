@@ -20,11 +20,6 @@
 }
 
 
-.song-table tbody tr td:first-child
-{
-	font-weight:bold;
-}
-
 .linkrow{
 	cursor:pointer;
 }
