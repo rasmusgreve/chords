@@ -1,6 +1,5 @@
 <?php
-mysql_connect("localhost","root","");
-mysql_select_db("chords");
+include_once("connectdb.php");
 
 
 
