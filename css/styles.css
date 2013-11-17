@@ -1,0 +1,20 @@
+.browse_nav
+{
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
+	text-align:center;
+}
+
+.browse_nav li.active
+{
+	font-weight:bold;
+}
+.browse_nav li.active:before
+{
+	content:'-';
+}
+.browse_nav li.active:after
+{
+	content:'-';
+}
