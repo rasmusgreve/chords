@@ -1,7 +1,7 @@
 <?php
 //before content
 $query = (isset($_GET['query'])) ? $_GET['query'] : '';
-$query_type = (isset($_GET['query_type']) && ($_GET['query_type'] == 'title' || $_GET['query_type'] == 'lyrics')) ? $_GET['query_type'] : '';
+$query_type = (isset($_GET['query_type']) && ($_GET['query_type'] == 'title' || $_GET['query_type'] == 'lyrics' || $_GET['query_type'] == 'artist')) ? $_GET['query_type'] : '';
 ?>
 
 <?php
@@ -23,16 +23,17 @@ function getContentNoSearch()
 {
 ?>
 <div class="col-md-8 col-md-offset-2 pre-search-container">
-	<h1>Search for title or lyrics</h1>
+	<h1>Search for title, artist or lyrics</h1>
 	<form method="get" action="./">
 		<input type='hidden' name='show' value='search'/>
 		<input type='hidden' name='query_type' id='query_type_input' value='title'/>
 		<div class="input-group input-group-lg">
 			<div class="input-group-btn">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span id='query_type_button'>Title</span> <span class="caret"></span></button>
-				<ul class="dropdown-menu">
-				  <li class='active' id='query_type_title'><a href="#">Title</a></li>
-				  <li id='query_type_lyrics'><a href="#">Lyrics</a></li>
+				<ul class="dropdown-menu" id="query_type_menu">
+				  <li class='active' id='query_type_title' data-value="title"><a href="#">Title</a></li>
+				  <li id='query_type_lyrics' data-value="lyrics"><a href="#">Lyrics</a></li>
+				  <li id='query_type_artist' data-value="artist"><a href="#">Artist</a></li>
 				</ul>
 			</div>
 			<input type='text' name='query' class='form-control'/>
@@ -48,7 +49,7 @@ function getContentQuery()
 {
 	global $query, $query_type;
 	
-	$query_type_print = ($query_type == 'title') ? 'titles' : 'lyrics';
+	$query_type_print = ($query_type == 'title') ? 'titles' : ($query_type == 'lyrics') ? 'lyrics' : 'artists';
 ?>
 <div class="col-md-12">
 	<div class="row">
@@ -82,18 +83,16 @@ function getJavascript(){
 }
 function getJavascriptNoSearch(){
 ?>
-$('#query_type_lyrics a').click(function() {
-	$('#query_type_title').removeClass('active');
-	$('#query_type_lyrics').addClass('active');
-	$('#query_type_button').html('Lyrics');
-	$('#query_type_input').val('lyrics');
+
+
+
+$('#query_type_menu li a').click(function() {
+	$('#query_type_menu li').removeClass('active');
+	$(this).parent().addClass('active');
+	$('#query_type_button').html($(this).html());
+	$('#query_type_input').val($(this).parent().data('value'));
 });
-$('#query_type_title a').click(function() {
-	$('#query_type_lyrics').removeClass('active');
-	$('#query_type_title').addClass('active');
-	$('#query_type_button').html('Title');
-	$('#query_type_input').val('title');
-});
+	
 
 <?php
 }
