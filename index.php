@@ -13,6 +13,7 @@ else
 <html>
 <head>
 <title>Chords</title>
+<meta charset="iso-8859-1">
 <link rel="shortcut icon" href="img/icon.png">
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/styles.css" rel="stylesheet">
