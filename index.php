@@ -1,7 +1,9 @@
 <?php
 $show = (isset($_GET['show']) && preg_match("/[a-z]+/",$_GET['show'])) ? $_GET['show'] : 'search';
 $action = (isset($_GET['action']) && preg_match("/[a-z]+/",$_GET['action'])) ? $_GET['action'] : '';
+include("php/util.php");
 include("php/$show.php");
+
 
 
 ?>
