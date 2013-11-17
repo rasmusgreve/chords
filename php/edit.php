@@ -7,17 +7,23 @@
 function getContent()
 {
 	$id = (isset($_GET['id']) && ctype_digit($_GET['id'])) ? $_GET['id'] : -1;
+	$song = array('id' => '-1','title' => '','artist' => '','lyrics' => '');
+	if ($id != -1)
+	{
+		$song_query = mysql_query("SELECT * FROM `song` WHERE `id` = '$id';");
+		$song = mysql_fetch_assoc($song_query);
+	}
 ?>
 <div class='col-md-12'>
 	<h1><?=($id==-1)?'Create':'Edit'?> song</h1>
 	<form class="" role="form">
 		<div class="form-group">
 			<label for="title" class="control-label">Title</label>
-				<input type="text" class="form-control" id="title" placeholder="Title" name="title">
+				<input type="text" class="form-control" id="title" placeholder="Title" name="title" value="<?=$song['title']?>">
 		</div>
 		<div class="form-group">
-			<label for="author" class="control-label">Author</label>
-				<input type="text" class="form-control" id="author" placeholder="Author" name="author">
+			<label for="artist" class="control-label">Artist</label>
+				<input type="text" class="form-control" id="artist" placeholder="Artist" name="artist" value="<?=$song['artist']?>">
 		</div>
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs">
@@ -30,22 +36,31 @@ function getContent()
 		<div class="tab-pane active" id="lyrics">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<textarea class="form-control" id="lyric_content" placeholder="Type or paste lyrics here..." rows=10></textarea>
+					<textarea class="form-control" id="lyric_content" placeholder="Type or paste lyrics here..." rows=20><?=$song['lyrics']?></textarea>
 					<br/>
-					<div class="btn-group lyric-pages">
-					  <a href="#" class="btn btn-primary" data-value="1">1</a>
-					  <a href="#" class="btn btn-default" data-value="2">2</a>
-					  <a href="#" class="btn btn-default" id="lyric-add">+</a>
-					</div>
 					<div class="pull-right">
-					  <a href="#" class="btn btn-primary">Save</a>
-					  <a href="#" class="btn btn-danger">Delete</a>
+					  <span id="save-notice"></span>
+					  <a href="#" class="btn btn-primary" id="lyric-save">Save lyrics</a>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="tab-pane" id="parts">Parts</div>
-		<div class="tab-pane" id="form">Form</div>
+		<div class="tab-pane" id="parts">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Parts
+				
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" id="form">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					Form
+				
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<a href="#" class="btn btn-primary">Done</a>
@@ -86,14 +101,19 @@ function getContent()
 <?php
 }
 function getJavascript(){
+	$id = (isset($_GET['id']) && ctype_digit($_GET['id'])) ? $_GET['id'] : -1;
 ?>
-<script>
-$("#lyric-add").click(function() {
-
+$("#lyric-save").click(function() {
+	$.ajax({
+		url: "./ajax.php?value=lyrics&action=put&song=<?=$id?>&id="+$(this).data('value')+"&data="+encodeURI($("#lyric_content").val())
+	})
+	.done(function( data ) {
+		$("#save-notice").html("<strong>Saved!</strong>");
+		$("#save-notice").show();
+		$("#save-notice").fadeOut(2000);
+	});
+	return false;
 });
-$("#lyric-add").click(function() {
-
-</script>
 <?php
 }
 ?>

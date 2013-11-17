@@ -35,23 +35,20 @@ switch($value)
 function value_lyrics($action, $data)
 {
 	$song = getGET('song','/\d+/');
-	$id = getGET('id','/\d+/');
 	if ($song == '') die("Illegal request. No song set.");
-	if ($id == '') die("Illegal request. No ID set.");
 	switch($action)
 	{
 		case 'get':
-			$q = mysql_query("SELECT `text` FROM `lyrics` WHERE `song` = '$song' AND `id` = '$id' LIMIT 1;");
+			$q = mysql_query("SELECT `lyrics` FROM `song` WHERE `id` = '$song' LIMIT 1;");
 			if (mysql_num_rows($q) == 0) die("");
 			echo mysql_result($q,0,0);
 			break;
 		case 'put':
-			$q = mysql_query("UPDATE `lyrics` SET `text` = '$data' WHERE `song` = '$song' AND `id` = '$id' LIMIT 1;");
+			$q = mysql_query("UPDATE `song` SET `lyrics` = '$data' WHERE `id` = '$song' LIMIT 1;");
 			echo "done";
 			break;
 		case 'delete':
-			$q = mysql_query("DELETE FROM `lyrics` WHERE `song` = '$song' AND `id` = '$id' LIMIT 1;");
-			echo "done";
+			die("Delete not allowed");
 			break;
 	}
 }
