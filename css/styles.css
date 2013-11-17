@@ -30,3 +30,12 @@
 .linkrow:hover td{
 	background-color:#FFE !important;
 }
+
+.edit-song-area div.row div
+{
+	border-left: 2px solid black;
+}
+.edit-song-area div.row div:last-child
+{
+	border-right: 2px solid black;
+}
