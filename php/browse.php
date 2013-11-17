@@ -8,6 +8,12 @@ function getContent()
 {
 	$letter = (isset($_GET['letter']) && preg_match("/[0-9A-ZÆØÅ]/",$_GET['letter'])) ? $_GET['letter'] : 'A';
 	
+	$overview_query = mysql_query("SELECT SUBSTRING(`title`,1,1) letter FROM `song` GROUP BY SUBSTRING(`title`,1,1);");
+	$active_letters = array();
+	while ($res = mysql_fetch_assoc($overview_query))
+	{
+		$active_letters[$res['letter']] = true;
+	}
 	$browse_query = mysql_query("SELECT `title`, `artist` FROM `song` WHERE `title` LIKE '$letter%';");
 	
 ?>
@@ -18,7 +24,10 @@ function getContent()
 			for ($i = ord('A'); $i <= ord('Z'); $i++)
 			{
 				$l = chr($i);
-				echo "<li ".(($l == $letter)?'class=\'active\'':'')."><a href='./?show=browse&letter=".chr($i)."'>".chr($i)."</a></li>";
+				if (isset($active_letters[$l]))
+					echo "<li ".(($l == $letter)?'class=\'active\'':'')."><a href='./?show=browse&letter=$l'>$l</a></li>";
+				else
+					echo "<li ".(($l == $letter)?'class=\'active\'':'').">$l</li>";
 			}
 			?>
 		</ul>

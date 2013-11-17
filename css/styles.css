@@ -10,14 +10,19 @@
 {
 	font-weight:bold;
 }
-.browse_nav li.active:before
+.browse_nav li.active a:before
 {
-	content:'-';
+	content:'>';
 }
-.browse_nav li.active:after
+.browse_nav li.active a:after
 {
-	content:'-';
+	content:'<';
 }
+.browse_nav li
+{
+	color:#DDD;
+}
+
 
 .pre-search-container
 {
