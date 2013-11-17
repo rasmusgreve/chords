@@ -14,7 +14,7 @@ function getContent()
 	}
 	else
 	{
-		getContentQuery($query);
+		getContentQuery();
 	}
 }
 
@@ -22,9 +22,9 @@ function getContent()
 function getContentNoSearch()
 {
 ?>
-<div class="col-md-6 col-md-offset-3 pre-search-container">
+<div class="col-md-8 col-md-offset-2 pre-search-container">
 	<h1>Search for title or lyrics</h1>
-	<form>
+	<form method="get" action="./">
 		<input type='hidden' name='show' value='search'/>
 		<input type='hidden' name='query_type' id='query_type_input' value='title'/>
 		<div class="input-group input-group-lg">
@@ -35,16 +35,32 @@ function getContentNoSearch()
 				  <li id='query_type_lyrics'><a href="#">Lyrics</a></li>
 				</ul>
 			</div>
-			<input type='text' name='query'  class='form-control'/>
+			<input type='text' name='query' class='form-control'/>
+			<div class="input-group-btn">
+				<button type="submit" class="btn btn-primary">Search</button>
+			</div>
 		</div>
 	</form>
 </div>
 <?php
 }
-function getContentQuery($query)
+function getContentQuery()
 {
-	echo "Query: " . $query;
+	global $query, $query_type;
+	
+	$query_type_print = ($query_type == 'title') ? 'titles' : 'lyrics';
 ?>
+<div class="col-md-12">
+	<div class="row">
+		<div class="col-md-10">
+			<h1>Search results for <?=$query_type_print?> containing "<?=$query?>"</h1>
+		</div>
+		<div class="col-md-2 text-right">
+			<a href="./?show=search" class="btn btn-default">New search</a>
+		</div>
+	</div>
+	<?php songTable("test"); ?>
+</div>
 
 
 <?php
