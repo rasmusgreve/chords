@@ -37,11 +37,6 @@ function getContent()
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<textarea class="form-control" id="lyric_content" placeholder="Type or paste lyrics here..." rows=20><?=$song['lyrics']?></textarea>
-					<br/>
-					<div class="pull-right">
-					  <span id="save-notice"></span>
-					  <a href="#" class="btn btn-primary" id="lyric-save">Save lyrics</a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -56,7 +51,7 @@ function getContent()
 		<div class="tab-pane" id="form">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					Form
+					(can wait)
 				
 				</div>
 			</div>
@@ -103,17 +98,7 @@ function getContent()
 function getJavascript(){
 	$id = (isset($_GET['id']) && ctype_digit($_GET['id'])) ? $_GET['id'] : -1;
 ?>
-$("#lyric-save").click(function() {
-	$.ajax({
-		url: "./ajax.php?value=lyrics&action=put&song=<?=$id?>&id="+$(this).data('value')+"&data="+encodeURI($("#lyric_content").val())
-	})
-	.done(function( data ) {
-		$("#save-notice").html("<strong>Saved!</strong>");
-		$("#save-notice").show();
-		$("#save-notice").fadeOut(2000);
-	});
-	return false;
-});
+
 <?php
 }
 ?>
