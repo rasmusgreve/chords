@@ -7,6 +7,9 @@
 function getContent()
 {
 	$letter = (isset($_GET['letter']) && preg_match("/[0-9A-ZÆØÅ]/",$_GET['letter'])) ? $_GET['letter'] : 'A';
+	
+	$browse_query = mysql_query("SELECT `title`, `artist` FROM `song` WHERE `title` LIKE '$letter%';");
+	
 ?>
 <div class="col-md-1">
 	<div class="well">
@@ -23,7 +26,7 @@ function getContent()
 </div>
 <div class="col-md-11">
 	<h1><?=$letter?></h1>
-	<?php songTable("test"); ?>
+	<?php songTable($browse_query); ?>
 </div>
 
 <?php

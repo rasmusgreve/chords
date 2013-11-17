@@ -1,4 +1,11 @@
 <?php
+mysql_connect("localhost","root","");
+mysql_select_db("chords");
+
+
+
+
+
 function songTable($query_result)
 {
 ?>
@@ -9,15 +16,15 @@ function songTable($query_result)
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="linkrow" href="./?show=play&id=1">
-			<td>Fix you</td><td>Coldplay</td><td>&nbsp;<span class='label label-success'>Chords</span> <span class='label label-info'>Lyrics</span></td>
-		</tr>
-		<tr class="linkrow" href="./?show=play&id=2">
-			<td>Samuel and Rosella</td><td>Lemon Demon</td><td>&nbsp;<span class='label label-success'>Chords</span></td>
-		</tr>
-		<tr class="linkrow" href="./?show=play&id=3">
-			<td>Circle of Life</td><td>Elton John</td><td>&nbsp;<span class='label label-info'>Lyrics</span></td>
-		</tr>
+		<?php
+		while ($res = mysql_fetch_assoc($query_result)) {
+		?>
+			<tr class="linkrow" href="./?show=play&id=1">
+				<td><?=$res['title']?></td><td><?=$res['artist']?></td><td>&nbsp;<span class='label label-success'>Chords</span> <span class='label label-info'>Lyrics</span></td>
+			</tr>
+		<?php
+		}
+		?>
 	</tbody>
 </table>
 <?php
