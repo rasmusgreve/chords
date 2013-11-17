@@ -22,7 +22,10 @@ function getContent()
 function getContentNoSearch()
 {
 ?>
-<div class="col-md-8 col-md-offset-2 pre-search-container">
+<div class="col-md-1 col-md-offset-1 pre-search-container text-right">
+	<h1 class="hidden-md hidden-sm hidden-xs search-icon"><span class="glyphicon glyphicon-search"></span></h1>
+</div>
+<div class="col-md-8 pre-search-container">
 	<h1>Search for title, artist or lyrics</h1>
 	<form method="get" action="./">
 		<input type='hidden' name='show' value='search'/>
@@ -58,7 +61,7 @@ function getContentQuery()
 			<h1>Search results for <?=$query_type_print?> containing "<?=$query?>"</h1>
 		</div>
 		<div class="col-md-2 text-right">
-			<a href="./?show=search" class="btn btn-default">New search</a>
+			<a href="./?show=search" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> New search</a>
 		</div>
 	</div>
 	<?php songTable($search_query); ?>
@@ -85,15 +88,12 @@ function getJavascript(){
 function getJavascriptNoSearch(){
 ?>
 
-
-
 $('#query_type_menu li a').click(function() {
 	$('#query_type_menu li').removeClass('active');
 	$(this).parent().addClass('active');
 	$('#query_type_button').html($(this).html());
 	$('#query_type_input').val($(this).parent().data('value'));
 });
-	
 
 <?php
 }
