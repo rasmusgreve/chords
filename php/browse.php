@@ -6,7 +6,6 @@
 <?php
 function getContent()
 {
-	$letter = (isset($_GET['letter']) && preg_match("/[0-9A-ZÆØÅ]/",$_GET['letter'])) ? $_GET['letter'] : 'A';
 	
 	$overview_query = mysql_query("SELECT SUBSTRING(`title`,1,1) letter FROM `song` GROUP BY SUBSTRING(`title`,1,1);");
 	$active_letters = array();
@@ -14,7 +13,11 @@ function getContent()
 	{
 		$active_letters[$res['letter']] = true;
 	}
-	$browse_query = mysql_query("SELECT `title`, `artist` FROM `song` WHERE `title` LIKE '$letter%';");
+	
+	$letter = (isset($_GET['letter']) && preg_match("/[0-9A-ZÆØÅ]/",$_GET['letter'])) ? $_GET['letter'] : ((count($active_letters)>0) ? array_keys($active_letters)[0] : 'A');
+	
+	
+	$browse_query = mysql_query("SELECT `id`, `title`, `artist` FROM `song` WHERE `title` LIKE '$letter%';");
 	
 ?>
 <div class="col-md-1">
