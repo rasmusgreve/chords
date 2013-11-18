@@ -29,7 +29,7 @@ function getContent()
 	}
 ?>
 <div class='col-md-12'>
-	<h1><?=($id==-1)?'Create':'Edit'?> song</h1>
+	<h1><?=($id==-1)?'Add':'Edit'?> song</h1>
 	<form class="form" role="form" method="post" action="./?show=edit">
 		<input type="hidden" name="id" value="<?=$song['id']?>" />
 		<div class="row">

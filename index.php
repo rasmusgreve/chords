@@ -37,7 +37,7 @@ else
 	  <ul class="nav navbar-nav">
 		<li class="<?=($show == 'search')?'active':''?>"><a href="./?show=search">Search</a></li>
 		<li class="<?=($show == 'browse')?'active':''?>"><a href="./?show=browse">Browse</a></li>
-		<li class="<?=($show == 'edit' && !isset($_GET['id']))?'active':''?>"><a href="./?show=edit">New</a></li>
+		<li class="<?=($show == 'edit' && !isset($_GET['id']))?'active':''?>"><a href="./?show=edit">Add</a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 		<li><a href="./?action=logout">Log out</a></li>
