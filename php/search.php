@@ -52,7 +52,7 @@ function getContentQuery()
 {
 	global $query, $query_type;
 	$query = mysql_real_escape_string($query);
-	$search_query = mysql_query("SELECT `id`, `title`, `artist` FROM `song` WHERE `$query_type` LIKE '%$query%';");
+	$search_query = mysql_query("SELECT `id`, `title`, `artist`, (`lyrics` <> '') as has_lyrics FROM `song` WHERE `$query_type` LIKE '%$query%';");
 	$query_type_print = ($query_type == 'title') ? 'titles' : ($query_type == 'lyrics') ? 'lyrics' : 'artists';
 ?>
 <div class="col-md-12">

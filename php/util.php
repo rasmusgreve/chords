@@ -1,36 +1,32 @@
 <?php
 include_once("connectdb.php");
 
-function getGET($name, $legal_values = '', $default_value = '')
+function getPOSTorGET($POSTorGET, $name, $legal_values = '', $default_value = '')
 {
 	if (is_array($legal_values))
 	{
-		return (isset($_GET[$name]) && in_array($_GET[$name],$legal_values)) ? $_GET[$name] : $default_value;
+		return (isset($POSTorGET[$name]) && in_array($POSTorGET[$name],$legal_values)) ? $POSTorGET[$name] : $default_value;
 	}
 	else if($legal_values != '')
 	{
-		return (isset($_GET[$name]) && preg_match($legal_values,$_GET[$name])) ? $_GET[$name] : $default_value;
+		return (isset($POSTorGET[$name]) && preg_match($legal_values,$POSTorGET[$name])) ? $POSTorGET[$name] : $default_value;
 	}
 	else
 	{
-		return (isset($_GET[$name])) ? mysql_real_escape_string($_GET[$name]) : $default_value;
+		return (isset($POSTorGET[$name])) ? mysql_real_escape_string($POSTorGET[$name]) : $default_value;
 	}
+}
+
+
+
+function getGET($name, $legal_values = '', $default_value = '')
+{
+	return getPOSTorGET($_GET, $name, $legal_values, $default_value);
 }
 
 function getPOST($name, $legal_values = '', $default_value = '')
 {
-	if (is_array($legal_values))
-	{
-		return (isset($_POST[$name]) && in_array($_POST[$name],$legal_values)) ? $_POST[$name] : $default_value;
-	}
-	else if($legal_values != '')
-	{
-		return (isset($_POST[$name]) && preg_match($legal_values,$_POST[$name])) ? $_POST[$name] : $default_value;
-	}
-	else
-	{
-		return (isset($_POST[$name])) ? $_POST[$name] : $default_value;
-	}
+	return getPOSTorGET($_POST, $name, $legal_values, $default_value);
 }
 
 function insertOrUpdate($table, $id, $key_values)
@@ -77,7 +73,9 @@ function songTable($query_result)
 		while ($res = mysql_fetch_assoc($query_result)) {
 		?>
 			<tr class="linkrow" href="./?show=play&id=<?=$res['id']?>">
-				<td><?=$res['title']?></td><td><?=$res['artist']?></td><td>&nbsp;<span class='label label-success'>Chords</span> <span class='label label-info'>Lyrics</span></td>
+				<td><?=$res['title']?></td>
+				<td><?=$res['artist']?></td>
+				<td>&nbsp;<span class='label label-success'>Chords</span> <?=$res['has_lyrics']?'<span class="label label-info">Lyrics</span>':''?></td>
 			</tr>
 		<?php
 		}

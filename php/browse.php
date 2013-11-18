@@ -17,7 +17,7 @@ function getContent()
 	$letter = (isset($_GET['letter']) && preg_match("/[0-9A-ZÆØÅ]/",$_GET['letter'])) ? $_GET['letter'] : ((count($active_letters)>0) ? array_keys($active_letters)[0] : 'A');
 	
 	
-	$browse_query = mysql_query("SELECT `id`, `title`, `artist` FROM `song` WHERE `title` LIKE '$letter%';");
+	$browse_query = mysql_query("SELECT `id`, `title`, `artist`, (`lyrics` <> '') as has_lyrics FROM `song` WHERE `title` LIKE '$letter%';");
 	
 ?>
 <div class="col-md-1">
