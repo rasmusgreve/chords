@@ -69,7 +69,47 @@ function getContent()
 					<textarea class="form-control" id="lyric_content" name="lyrics" placeholder="Type or paste lyrics here..." rows=20><?=$song['lyrics']?></textarea>
 				</div>
 				<div class="tab-pane" id="chords">
-					Chords
+					<div class="row"><!--todo: store in 2d array and transfer as json -->
+						<div class="col-md-9">
+							<br/>
+							<table>
+								<tr>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+								</tr>
+								<tr>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+									<td><input type="text"/></td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-md-3">
+							<br/>
+							<div class="list-group">
+								<a href="#" class="list-group-item active">
+									Verse
+								</a>
+								<a href="#" class="list-group-item">
+									Chorus
+								</a>
+								<a href="#" class="list-group-item text-center">
+									<span class="glyphicon glyphicon-plus-sign"></span> Add
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="tab-pane" id="form">
 					(Can wait)
