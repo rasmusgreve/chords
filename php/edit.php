@@ -56,36 +56,26 @@ function getContent()
 		</div>
 		
 	<!-- Nav tabs -->
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#lyrics" data-toggle="tab">Lyrics</a></li>
-		<li><a href="#parts" data-toggle="tab">Parts</a></li>
-		<li><a href="#form" data-toggle="tab">Form</a></li>
-	</ul>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#lyrics" data-toggle="tab">Lyrics</a></li>
+				<li><a href="#chords" data-toggle="tab">Chords</a></li>
+				<li><a href="#form" data-toggle="tab">Form</a></li>
+			</ul>
 
-	<div class="tab-content">
-		<div class="tab-pane active" id="lyrics">
-			<div class="panel panel-default">
-				<div class="panel-body">
+			<div class="tab-content">
+				<div class="tab-pane active" id="lyrics">
 					<textarea class="form-control" id="lyric_content" name="lyrics" placeholder="Type or paste lyrics here..." rows=20><?=$song['lyrics']?></textarea>
 				</div>
-			</div>
-		</div>
-		<div class="tab-pane" id="parts">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					Parts
-				
+				<div class="tab-pane" id="chords">
+					Chords
+				</div>
+				<div class="tab-pane" id="form">
+					(Can wait)
 				</div>
 			</div>
-		</div>
-		<div class="tab-pane" id="form">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					(can wait)
-				
-				</div>
 			</div>
-		</div>
 	</div>
 	
 	<input type="submit" class="btn btn-primary" value="Save" />
