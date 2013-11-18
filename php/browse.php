@@ -15,7 +15,7 @@ function getContent()
 	}
 	
 	$letter = (isset($_GET['letter']) && preg_match("/[0-9A-ZÆØÅ]/",$_GET['letter'])) ? $_GET['letter'] : ((count($active_letters)>0) ? array_keys($active_letters)[0] : 'A');
-	
+	if (isset($_GET['all'])) $letter = '';
 	
 	$browse_query = mysql_query("SELECT `id`, `title`, `artist`, (`lyrics` <> '') as has_lyrics FROM `song` WHERE `title` LIKE '$letter%';");
 	
@@ -33,11 +33,12 @@ function getContent()
 					echo "<li ".(($l == $letter)?'class=\'active\'':'').">$l</li>";
 			}
 			?>
+			<li <?=(isset($_GET['all']))?'class=\'active\'':''?> ><a href='./?show=browse&all'>All</a></li>
 		</ul>
 	</div>
 </div>
 <div class="col-md-11">
-	<h1><?=$letter?></h1>
+	<h1><?=$letter==''?'All songs':$letter?></h1>
 	<?php songTable($browse_query); ?>
 </div>
 
