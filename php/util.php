@@ -61,7 +61,7 @@ function insertOrUpdate($table, $id, $key_values)
 
 function songTable($filter = '')
 {
-	$where = ($filter == '') ? '' : "AND $filter";
+	$where = ($filter == '') ? '' : "WHERE $filter";
 	$query_result = mysql_query("SELECT s.`id`, s.`title`, s.`artist`, (TRIM(s.`lyrics`) <> '') as has_lyrics, (COUNT(c.`id`) > 0) as has_chords FROM `song` s LEFT JOIN `chords` c ON c.`song` = s.`id` $where GROUP BY s.`id`;");
 	
 ?>
