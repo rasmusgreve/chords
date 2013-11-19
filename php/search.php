@@ -52,7 +52,6 @@ function getContentQuery()
 {
 	global $query, $query_type;
 	$query = mysql_real_escape_string($query);
-	$search_query = mysql_query("SELECT `id`, `title`, `artist`, (`lyrics` <> '') as has_lyrics FROM `song` WHERE `$query_type` LIKE '%$query%';");
 	$query_type_print = ($query_type == 'title') ? 'titles' : ($query_type == 'lyrics') ? 'lyrics' : 'artists';
 ?>
 <div class="col-md-12">
@@ -64,7 +63,7 @@ function getContentQuery()
 			<a href="./?show=search" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> New search</a>
 		</div>
 	</div>
-	<?php songTable($search_query); ?>
+	<?php songTable("`$query_type` LIKE '%$query%'"); ?>
 </div>
 
 

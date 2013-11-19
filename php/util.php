@@ -59,8 +59,11 @@ function insertOrUpdate($table, $id, $key_values)
 
 
 
-function songTable($query_result)
+function songTable($filter = '')
 {
+	$where = ($filter == '') ? '' : "AND $filter";
+	$query_result = mysql_query("SELECT s.`id`, s.`title`, s.`artist`, (TRIM(s.`lyrics`) <> '') as has_lyrics, (COUNT(c.`id`) > 0) as has_chords FROM `song` s LEFT JOIN `chords` c ON c.`song` = s.`id` $where GROUP BY s.`id`;");
+	
 ?>
 <table class="table table-striped song-table">
 	<thead>
@@ -71,11 +74,14 @@ function songTable($query_result)
 	<tbody>
 		<?php
 		while ($res = mysql_fetch_assoc($query_result)) {
+			//$chords_object = json_decode($res['chords']);
+			// json_encode(array(array("Em","D","Gm","A"),array("Em","D","Gm","A")));
+			// array(array())
 		?>
 			<tr class="linkrow" href="./?show=play&id=<?=$res['id']?>">
 				<td><?=$res['title']?></td>
 				<td><?=$res['artist']?></td>
-				<td>&nbsp;<span class='label label-success'>Chords</span> <?=$res['has_lyrics']?'<span class="label label-info">Lyrics</span>':''?></td>
+				<td>&nbsp;<?=$res['has_chords']?'<span class="label label-success">Chords</span>':''?> <?=$res['has_lyrics']?'<span class="label label-info">Lyrics</span>':''?></td>
 			</tr>
 		<?php
 		}

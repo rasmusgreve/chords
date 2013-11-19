@@ -17,8 +17,6 @@ function getContent()
 	$letter = (isset($_GET['letter']) && preg_match("/[0-9A-ZÆØÅ]/",$_GET['letter'])) ? $_GET['letter'] : ((count($active_letters)>0) ? array_keys($active_letters)[0] : 'A');
 	if (isset($_GET['all'])) $letter = '';
 	
-	$browse_query = mysql_query("SELECT `id`, `title`, `artist`, (`lyrics` <> '') as has_lyrics FROM `song` WHERE `title` LIKE '$letter%';");
-	
 ?>
 <div class="col-md-1">
 	<div class="well">
@@ -39,7 +37,7 @@ function getContent()
 </div>
 <div class="col-md-11">
 	<h1><?=$letter==''?'All songs':$letter?></h1>
-	<?php songTable($browse_query); ?>
+	<?php songTable("`title` LIKE '$letter%'"); ?>
 </div>
 
 <?php
