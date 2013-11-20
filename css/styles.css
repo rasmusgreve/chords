@@ -49,31 +49,38 @@
 	border-right: 2px solid black;
 }
 
-
-#chords table
+#chords_table
 {
-	table-layout:fixed;
+	border-collapse: separate;
+	border-spacing:0px 5px;
 }
 
-#chords input
+#chords_table td
 {
+	padding:10px;
+}
+
+#chords_table input
+{
+	font-size:1.2em;
 	width:100%;
 	padding:5px;
-	margin:5px;
+	border:	1px solid #FFF;
+	border-bottom:1px solid #EEE;
+}
+
+#chords_table td:nth-child(2n)
+{
+	border-right:1px solid #666;
+}
+
+#chords_table td:nth-child(8)
+{
+	border-right:0;
+}
+
+#chords_table input:hover
+{
 	border:1px solid #EEE;
-}
-
-#chords td:nth-child(2n) input
-{
-	border-right:2px solid #000;
-}
-
-#chords td:last-child input
-{
-	border-right:1px solid #EEE;
-}
-
-#chords input:hover
-{
-	border:1px solid #CCC;
+	box-shadow: 0px 0px 5px #FF0;
 }

@@ -70,7 +70,7 @@ function getContent()
 				</div>
 				<div class="tab-pane" id="chords">
 					<div class="row"><!--todo: store in 2d array and transfer as json -->
-						<div class="col-md-9">
+						<div class="col-md-9  text-center">
 							<br/>
 							<table id="chords_table">
 							</table>
