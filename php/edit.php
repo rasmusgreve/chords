@@ -70,8 +70,8 @@ function getContent()
 				</div>
 				<div class="tab-pane" id="chords">
 					<div class="row"><!--todo: store in 2d array and transfer as json -->
-						<div class="col-md-9  text-center">
-							<br/>
+						<div class="col-md-9">
+							<input value="Verse" id="chords_heading"/>
 							<table id="chords_table">
 							</table>
 							<a href="#" id="chords_add_row" class="btn btn-xs btn-primary">Add row</a>	
