@@ -14,8 +14,8 @@ Show song id : <?=$_GET['id']?>
 }
 function getJavascript(){
 ?>
-
-
+<script type="text/javascript">
+</script>
 <?php
 }
 ?>

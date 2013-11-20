@@ -44,7 +44,8 @@ function getContent()
 }
 function getJavascript(){
 ?>
-
+<script type="text/javascript">
+</script>
 <?php
 }
 ?>

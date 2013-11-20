@@ -98,7 +98,8 @@ $('#query_type_menu li a').click(function() {
 }
 function getJavascriptQuery(){
 ?>
-
+<script type="text/javascript">
+</script>
 <?php
 }
 ?>
