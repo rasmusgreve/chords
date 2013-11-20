@@ -49,6 +49,11 @@
 	border-right: 2px solid black;
 }
 
+#song-data-tab
+{
+	min-height:300px;
+}
+
 #chords_table
 {
 	border-collapse: separate;

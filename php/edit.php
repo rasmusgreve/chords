@@ -64,7 +64,7 @@ function getContent()
 				<li><a href="#form" data-toggle="tab">Form</a></li>
 			</ul>
 
-			<div class="tab-content">
+			<div class="tab-content" id="song-data-tab">
 				<div class="tab-pane active" id="chords">
 					<div class="row"><!--todo: store in 2d array and transfer as json -->
 						<div class="col-md-9">
