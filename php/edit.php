@@ -59,16 +59,13 @@ function getContent()
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#lyrics" data-toggle="tab">Lyrics</a></li>
-				<li><a href="#chords" data-toggle="tab">Chords</a></li>
+				<li class="active"><a href="#chords" data-toggle="tab">Chords</a></li>
+				<li><a href="#lyrics" data-toggle="tab">Lyrics</a></li>
 				<li><a href="#form" data-toggle="tab">Form</a></li>
 			</ul>
 
 			<div class="tab-content">
-				<div class="tab-pane active" id="lyrics">
-					<textarea class="form-control" id="lyric_content" name="lyrics" placeholder="Type or paste lyrics here..." rows=20><?=$song['lyrics']?></textarea>
-				</div>
-				<div class="tab-pane" id="chords">
+				<div class="tab-pane active" id="chords">
 					<div class="row"><!--todo: store in 2d array and transfer as json -->
 						<div class="col-md-9">
 							<input value="Verse" id="chords_heading"/>
@@ -91,6 +88,9 @@ function getContent()
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="tab-pane" id="lyrics">
+					<textarea class="form-control" id="lyric_content" name="lyrics" placeholder="Type or paste lyrics here..." rows=20><?=$song['lyrics']?></textarea>
 				</div>
 				<div class="tab-pane" id="form">
 					(Can wait)
