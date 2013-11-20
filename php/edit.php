@@ -68,14 +68,14 @@ function getContent()
 				<div class="tab-pane active" id="chords">
 					<div class="row"><!--todo: store in 2d array and transfer as json -->
 						<div class="col-md-9">
-							<input value="Verse" id="chords_heading"/>
-							<table id="chords_table">
-							</table>
+							<input id="chords_heading"/>
+							<table id="chords_table"></table>
 							<a href="#" id="chords_add_row" class="btn btn-xs btn-primary" onclick="addRow();return false;">Add row</a>
+							<a href="#" id="chords_add_row" class="btn btn-xs btn-danger" onclick="deletePart(0);return false;">Delete part</a>
 						</div>
 						<div class="col-md-3">
 							<br/>
-							<div class="list-group" id="parts-list">
+							<div class="list-group" id="parts_list">
 								<a href="#" class="list-group-item text-center" onclick="addPart();return false;">
 									<span class="glyphicon glyphicon-plus-sign"></span> Add
 								</a>
@@ -109,7 +109,9 @@ String.prototype.repeat = function( num )
     return new Array( num + 1 ).join( this );
 }
 var chord_rows = 0;
-var chord_data = new Array(); //Part id -> chord data
+var chord_data = new Array(); //Part id -> chord data object
+var num_parts = 0;
+var current_part = -1;
 function addRow()
 {
 	var content = "";
@@ -156,45 +158,50 @@ function setChordData(chord) // chord : Chord
 	}
 }
 
-var num_parts = 0;
-var current_part = 0;
 function addPart()
 {
-	$("#parts-list a:last").before("<a href='#' class='list-group-item' id='parts_list_item_"+num_parts+"' onclick='clickPart("+num_parts +");return false;'>Chorus</a>");
-	//chord_data[num_parts++] = new Array();
+	$("#parts_list a:last").before("<a href='#' class='list-group-item' id='parts_list_item_"+num_parts+"' onclick='clickPart("+num_parts +");return false;'>Chorus</a>");
+	chord_data[num_parts] = new Object();
+	chord_data[num_parts].title = "Chorus";
+	chord_data[num_parts].data = new Array();
 	
-	//$("#parts-list a:not(:last)").
+	num_parts++
+	//$("#parts_list a:not(:last)").
 }
 function deletePart(id)
 {
 	for(var i = id+1; i < num_parts;i++)
 		chord_data[i-1] = chord_data[i];
 	chord_data[num_parts-1] = null;
+	$("#parts_list_item_"+id).remove();
 	num_parts--;
 	//TODO: Disallow deleting last part
 	clickPart(0);
 }
-function setParts(chords) //chords : Array(Chord)
-{
-	
-}
-
 function loadPart(id)
 {
-	if (chord_data[id] == undefined) return;
+	if (chord_data[id] === undefined) 
+	{
+		alert("Tried loading " + id+ " but its undefined");
+		return;
+	}
 	if (chord_data[id].data != undefined)
-		setChordData(chord_data[id].data);
-	$("#chords_heading").unbind("change");
-	$("#chords_heading").bind("change", function() {
-		$("#parts_list_item_"+id+"").html($("#chords_heading").val());
+		setChordData(chord_data[id]);
+	else
+		alert("Didn't find any chord data for id " + id);
+	$("#chords_heading").unbind("keyup");
+	$("#chords_heading").bind("keyup", function() {
+		$("#parts_list_item_"+id).html($("#chords_heading").val());
 	});
 	current_part = id;
 }
 
 function clickPart(id)
 {
+	$("#parts_list a").removeClass("active");
+	$("#parts_list_item_"+id).addClass("active");
 	chord_data[current_part] = extractChordData();
-	loadPart(id)
+	loadPart(id);
 }
 
 </script>
