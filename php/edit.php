@@ -72,28 +72,9 @@ function getContent()
 					<div class="row"><!--todo: store in 2d array and transfer as json -->
 						<div class="col-md-9">
 							<br/>
-							<table>
-								<tr>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-								</tr>
-								<tr>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-									<td><input type="text"/></td>
-								</tr>
+							<table id="chords_table">
 							</table>
+							<a href="#" id="chords_add_row" class="btn btn-xs btn-primary">Add row</a>	
 						</div>
 						<div class="col-md-3">
 							<br/>
@@ -120,37 +101,6 @@ function getContent()
 	
 	<input type="submit" class="btn btn-primary" value="Save" />
 	<a href="./" class="btn btn-default">Back</a> <!--TODO: Onclick js check for changes-->
-	
-	<!--
-	<div class="row">
-		<div class="col-md-9">
-			<div class="edit-song-area">
-				<h3>Intro</h3>
-				<div class="row">
-					<div class="col-md-3">4</div>
-					<div class="col-md-3">4</div>
-					<div class="col-md-3">4</div>
-					<div class="col-md-3">4</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="well">
-				<h2>Form</h2>
-				<ul class="list-group">
-					<li class="list-group-item">Intro</li>
-					<li class="list-group-item">Verse 1</li>
-					<li class="list-group-item">Verse 2</li>
-					<li class="list-group-item">Chorus</li>
-					<li class="list-group-item">Verse 3</li>
-					<li class="list-group-item">Chorus</li>
-					<li class="list-group-item">Bridge</li>
-					<li class="list-group-item">Chorus</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	-->
 	</form>
 	
 </div>
@@ -159,6 +109,44 @@ function getContent()
 function getJavascript(){
 	$id = (isset($_GET['id']) && ctype_digit($_GET['id'])) ? $_GET['id'] : -1;
 ?>
+<script type="text/javascript">
+String.prototype.repeat = function( num )
+{
+    return new Array( num + 1 ).join( this );
+}
+var chord_rows = 0;
+function addRow()
+{
+	chord_rows++;
+	var content = "";
+	for(var i = 1; i <= 8; i++)
+		content += "<td><input class='chord_col_" + i + "' /></td>";
+	content += "<td><a href='#' class='btn btn-xs btn-danger' onclick='deleteRow(\""+chord_rows+"\");return false;'>Delete</a></td>";
+	$("#chords_table").append("<tr id='chord_row_" + chord_rows + "'>"+content+"</tr>");
+}
+function deleteRow(id)
+{
+	$("#chord_row_"+id).remove();
+	for(var i = id+1; $("#chord_row_"+i).length > 0;i++)
+		$("#chord_row_"+i).attr("id","chord_row_"+(i-1));
+	chord_rows--;
+}
+function extractData()
+{
+	
+}
+function setData(data)
+{
+	
+}
+
+$("#chords_add_row").click(function(){
+	addRow();
+	return false;
+});
+
+
+</script>
 
 <?php
 }
