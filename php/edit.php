@@ -71,18 +71,18 @@ function getContent()
 							<input value="Verse" id="chords_heading"/>
 							<table id="chords_table">
 							</table>
-							<a href="#" id="chords_add_row" class="btn btn-xs btn-primary">Add row</a>	
+							<a href="#" id="chords_add_row" class="btn btn-xs btn-primary" onclick="addRow();return false;">Add row</a>	
 						</div>
 						<div class="col-md-3">
 							<br/>
-							<div class="list-group">
+							<div class="list-group" id="parts-list">
 								<a href="#" class="list-group-item active">
 									Verse
 								</a>
 								<a href="#" class="list-group-item">
 									Chorus
 								</a>
-								<a href="#" class="list-group-item text-center">
+								<a href="#" class="list-group-item text-center" onclick="addPart();return false;">
 									<span class="glyphicon glyphicon-plus-sign"></span> Add
 								</a>
 							</div>
@@ -117,12 +117,12 @@ String.prototype.repeat = function( num )
 var chord_rows = 0;
 function addRow()
 {
-	chord_rows++;
 	var content = "";
-	for(var i = 1; i <= 8; i++)
+	for(var i = 0; i < 8; i++)
 		content += "<td><input class='chord_col_" + i + "' /></td>";
 	content += "<td><a href='#' class='btn btn-xs btn-danger' onclick='deleteRow(\""+chord_rows+"\");return false;'>Delete</a></td>";
 	$("#chords_table").append("<tr id='chord_row_" + chord_rows + "'>"+content+"</tr>");
+	chord_rows++;
 }
 function deleteRow(id)
 {
@@ -131,20 +131,61 @@ function deleteRow(id)
 		$("#chord_row_"+i).attr("id","chord_row_"+(i-1));
 	chord_rows--;
 }
-function extractData()
+function clearRows()
+{
+	$("#chords_table").empty();
+	chord_rows = 0;
+}
+
+function extractPartData()
+{
+	var data = new Array();
+	for (var row = 0; row < chord_rows; row++)
+	{
+		data[row] = new Array();
+		for (var col = 0; col < 8; col++)
+			data[row][col] = $("#chord_row_"+row+" .chord_col_"+col).val();
+	}
+	return data;
+}
+function setPartData(data)
+{
+	clearRows();
+	for (var row = 0; row < data.length; row++)
+	{
+		addRow();
+		for (var col = 0; col < 8; col++)
+			$("#chord_row_"+row+" .chord_col_"+col).val(data[row][col]);
+	}
+}
+
+var num_parts = 0;
+function addPart()
+{
+	$("#parts-list a:last").before("<a href='#' class='list-group-item'>Chorus</a>");
+	//$("#parts-list a:not(:last)").
+}
+function deletePart()
+{
+
+}
+
+function extractPartData()
 {
 	
 }
-function setData(data)
+function setPartData()
 {
 	
 }
 
-$("#chords_add_row").click(function(){
-	addRow();
-	return false;
-});
-
+function clickPart(id)
+{
+	//extractData() -> store somewhere
+	//load data from somewhere -> setData(data)
+	//Update chords_heading
+	//Update chords_heading onchange method
+}
 
 </script>
 
