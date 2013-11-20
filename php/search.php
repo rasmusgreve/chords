@@ -86,14 +86,14 @@ function getJavascript(){
 }
 function getJavascriptNoSearch(){
 ?>
-
+<script type="text/javascript">
 $('#query_type_menu li a').click(function() {
 	$('#query_type_menu li').removeClass('active');
 	$(this).parent().addClass('active');
 	$('#query_type_button').html($(this).html());
 	$('#query_type_input').val($(this).parent().data('value'));
 });
-
+</script>
 <?php
 }
 function getJavascriptQuery(){
