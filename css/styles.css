@@ -56,6 +56,8 @@
 
 #chords_table
 {
+	table-layout:fixed;
+	width:100%;
 	border-collapse: separate;
 	border-spacing:0px 5px;
 }
@@ -74,6 +76,7 @@
 #chords_table td
 {
 	padding:10px;
+	font-size:1.2em;
 }
 
 #chords_table input

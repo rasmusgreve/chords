@@ -22,13 +22,18 @@ function getContent()
 		while ($res = mysql_fetch_assoc($parts_query)) {
 			$chords = json_decode($res['json']);
 		?>
-		<h3><?=$res['name']?></h3>
-			<?php foreach($chords as $row) {
-					foreach($row as $chord) {?>
-						<?=$chord?> - 
-				<?php }
-			}
-		}?>
+			<h3><?=$res['name']?></h3>
+			<table id="chords_table">
+				<?php foreach($chords as $row) {?>
+					<tr>
+					<?php foreach($row as $chord) {?>
+						<td><?=$chord?></td>
+					<?php } ?>
+					</tr>
+				<?php }?>
+			</table>
+		<?php }?>
+		
 	</div>
 	<div class='col-md-5'>
 <pre>
