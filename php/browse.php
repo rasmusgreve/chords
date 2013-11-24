@@ -14,7 +14,7 @@ function getContent()
 		$active_letters[$res['letter']] = true;
 	}
 	
-	$letter = (isset($_GET['letter']) && preg_match("/[0-9A-ZÆØÅ]/",$_GET['letter'])) ? $_GET['letter'] : ((count($active_letters)>0) ? array_keys($active_letters)[0] : 'A');
+	$letter = (isset($_GET['letter']) && preg_match('/^[0-9A-ZÆØÅ]$/',$_GET['letter'])) ? $_GET['letter'] : ((count($active_letters)>0) ? array_keys($active_letters)[0] : 'A');
 	if (isset($_GET['all'])) $letter = '';
 	
 ?>
